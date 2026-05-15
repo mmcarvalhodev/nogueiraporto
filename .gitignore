@@ -1,0 +1,41 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentos comerciais e credenciais internas (nunca vão pro repo)
+proposta.html
+proposta*.pdf
+contas*.txt
+credenciais*.txt
+*.key
+*.pem
+secrets/
+
+# Build artifacts (quando virar Next.js)
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# Env vars
+.env
+.env.local
+.env*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Deploy
+.vercel/
+.netlify/

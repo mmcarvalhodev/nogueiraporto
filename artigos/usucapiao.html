@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-palette="navy">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usucapião: 4 modalidades — Nogueira Porto Advogados</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #fbf8f3;
+      --bg-page-2: #f5efe5;
+      --bg-dark: #0c1f3d;
+      --bg-dark-2: #142c4c;
+      --bg-darkest: #0a1729;
+      --text-light: #fbf8f3;
+      --text-light-soft: rgba(245, 239, 229, 0.8);
+      --text-light-soft-2: rgba(245, 239, 229, 0.6);
+      --text-dark: #2c3530;
+      --text-darker: #111915;
+      --accent: #c9a961;
+      --accent-hover: #b8985a;
+      --accent-soft: #d4b06a;
+      --accent-bright: #ffaa3a;
+      --border-soft: #d4e2f0;
+      --border-soft-dark: rgba(251, 248, 243, 0.1);
+    }
+    [data-palette="emerald"] {
+      --bg-page: #f5f0e8;
+      --bg-page-2: #ebe3d5;
+      --bg-dark: #064e3b;
+      --bg-dark-2: #065f46;
+      --bg-darkest: #033324;
+      --text-light: #f5f0e8;
+      --text-light-soft: rgba(245, 240, 232, 0.8);
+      --text-light-soft-2: rgba(245, 240, 232, 0.6);
+      --text-dark: #1f2937;
+      --text-darker: #0f1419;
+      --accent: #b08d57;
+      --accent-hover: #9a7a4a;
+      --accent-soft: #c5a572;
+      --accent-bright: #d4ad6f;
+      --border-soft: #d6cab8;
+      --border-soft-dark: rgba(245, 240, 232, 0.1);
+    }
+    [data-palette="black"] {
+      --bg-page: #f8f5ed;
+      --bg-page-2: #ede8d8;
+      --bg-dark: #0a0a0a;
+      --bg-dark-2: #1a1a1a;
+      --bg-darkest: #000000;
+      --text-light: #f8f5ed;
+      --text-light-soft: rgba(248, 245, 237, 0.8);
+      --text-light-soft-2: rgba(248, 245, 237, 0.6);
+      --text-dark: #1a1a1a;
+      --text-darker: #000000;
+      --accent: #c9a161;
+      --accent-hover: #b8915a;
+      --accent-soft: #d4b078;
+      --accent-bright: #e8c87d;
+      --border-soft: #d6cab8;
+      --border-soft-dark: rgba(248, 245, 237, 0.1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-page);
+      color: var(--text-darker);
+      font-family: 'Inter', system-ui, sans-serif;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    .font-serif { font-family: 'Cormorant Garamond', serif; }
+    .bg-page { background: var(--bg-page); }
+    .bg-dark { background: var(--bg-dark); }
+    .bg-darkest { background: var(--bg-darkest); }
+    .text-light { color: var(--text-light); }
+    .text-light-soft { color: var(--text-light-soft); }
+    .text-light-soft-2 { color: var(--text-light-soft-2); }
+    .text-dark { color: var(--text-dark); }
+    .text-accent { color: var(--accent); }
+    .bg-accent { background: var(--accent); }
+    .btn-primary { background: var(--accent); color: var(--bg-dark); transition: background 0.2s ease; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-dark { background: var(--bg-dark-2); color: var(--text-light); transition: background 0.2s ease; }
+    .btn-dark:hover { background: var(--bg-dark); }
+    .gold-rule { background: linear-gradient(90deg, transparent, var(--accent), transparent); height: 1px; }
+
+    .prose-custom h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--bg-dark);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+    .prose-custom h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--bg-dark);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+    .prose-custom p {
+      color: var(--text-dark);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .prose-custom strong { color: var(--bg-dark); font-weight: 600; }
+    .prose-custom ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: 1.25rem;
+    }
+    .prose-custom ul li { margin-bottom: 0.5rem; line-height: 1.7; }
+    .prose-custom blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.25rem;
+      font-style: italic;
+      color: var(--text-dark);
+      margin: 1.5rem 0;
+    }
+
+    .modality-card {
+      background: var(--bg-page-2);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .modality-card h3 {
+      margin-top: 0;
+    }
+    .modality-meta {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .wa-pulse::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 9999px;
+      background: #22c55e;
+      opacity: 0.35;
+      animation: wa-pulse 2s infinite;
+    }
+    @keyframes wa-pulse {
+      0% { transform: scale(0.95); opacity: 0.5; }
+      70% { transform: scale(1.3); opacity: 0; }
+      100% { opacity: 0; }
+    }
+    .palette-switch {
+      position: fixed; bottom: 24px; left: 24px; z-index: 60;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px; border-radius: 9999px;
+      background: var(--bg-dark); color: var(--text-light);
+      border: 1px solid var(--accent);
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      cursor: pointer; box-shadow: 0 8px 24px -8px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, background 0.5s ease;
+    }
+    .palette-switch:hover { transform: translateY(-2px); }
+    .palette-dot {
+      width: 14px; height: 14px; border-radius: 9999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 2px var(--bg-dark), 0 0 0 3px var(--accent);
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col antialiased">
+
+  <header class="sticky top-0 z-40 backdrop-blur border-b" style="background: rgba(251, 248, 243, 0.9); border-color: var(--border-soft);">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center">
+        <img src="../logo-np.png" alt="Nogueira Porto Advocacia" class="h-16 w-auto" style="filter: drop-shadow(0 0 2px rgba(12,31,61,0.25));" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--text-dark);">
+        <a href="../index.html#areas" class="hover:opacity-70">Áreas</a>
+        <a href="../index.html#equipe" class="hover:opacity-70">Equipe</a>
+        <a href="../index.html#quando" class="hover:opacity-70">Sobre</a>
+        <a href="../index.html#faq" class="hover:opacity-70">FAQ</a>
+        <a href="../index.html#artigos" class="hover:opacity-70">Artigos</a>
+      </nav>
+      <button type="button" onclick="openWhatsAppModal()" class="hidden md:inline-flex items-center gap-2 btn-dark px-4 py-2 rounded-full text-sm font-medium">
+        Falar agora
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1">
+    <article class="py-16">
+      <div class="max-w-3xl mx-auto px-6">
+        <a href="../index.html#artigos" class="text-sm inline-flex items-center gap-2 mb-8 hover:opacity-70" style="color: var(--text-dark);">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+          Voltar para os artigos
+        </a>
+
+        <div class="text-xs uppercase tracking-widest text-accent mb-3">Imobiliário · Registral</div>
+        <h1 class="font-serif text-3xl md:text-4xl leading-tight mb-4" style="color: var(--bg-dark);">
+          Usucapião: 4 modalidades de regularização de imóvel
+        </h1>
+        <div class="text-sm mb-10" style="color: var(--text-dark); opacity: 0.6;">
+          Publicado em 06 de maio de 2026 · 8 min de leitura · Por Fabiano Nogueira Porto
+        </div>
+
+        <div class="aspect-[16/9] rounded-2xl overflow-hidden mb-12 relative">
+          <img
+            src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80"
+            alt="Casa antiga em processo de regularização"
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.3) 100%);"></div>
+        </div>
+
+        <div class="prose-custom">
+          <p>
+            Quem ocupa um imóvel por anos, sem oposição do proprietário, pode
+            adquirir o direito à propriedade através da <strong>usucapião</strong>.
+            É um instituto antigo do direito civil — está no Código Civil desde
+            1916 — mas que segue gerando dúvidas porque tem várias modalidades,
+            cada uma com requisitos diferentes.
+          </p>
+
+          <p>
+            Neste artigo, organizamos as <strong>4 modalidades principais</strong>
+            de usucapião no Brasil, os requisitos de cada uma e quando vale a pena
+            entrar com a ação.
+          </p>
+
+          <h2>O que toda usucapião exige (requisitos comuns)</h2>
+
+          <p>Independentemente da modalidade, três elementos são sempre necessários:</p>
+
+          <ul>
+            <li><strong>Posse mansa e pacífica</strong>: sem oposição do verdadeiro proprietário durante todo o prazo.</li>
+            <li><strong>Posse contínua</strong>: sem interrupção significativa do uso.</li>
+            <li><strong>Animus domini</strong>: a posse com intenção de ser dono — não apenas como inquilino ou comodatário.</li>
+          </ul>
+
+          <blockquote>
+            Quem aluga um imóvel <strong>não</strong> pode usucapir, porque a posse
+            é precária (reconhece o dono). O mesmo vale pra comodatários.
+          </blockquote>
+
+          <h2>As 4 modalidades</h2>
+
+          <div class="modality-card">
+            <div class="modality-meta">Modalidade 1</div>
+            <h3>Usucapião extraordinária</h3>
+            <p>
+              É a mais "clássica". Não exige justo título nem boa-fé — basta a
+              posse longa e pacífica.
+            </p>
+            <ul>
+              <li><strong>Prazo:</strong> 15 anos (ou 10 se houver moradia habitual ou obras produtivas no imóvel)</li>
+              <li><strong>Requisitos extra:</strong> nenhum além dos comuns</li>
+              <li><strong>Quando usar:</strong> quando você ocupa o imóvel há muitos anos mas não tem documento algum</li>
+            </ul>
+          </div>
+
+          <div class="modality-card">
+            <div class="modality-meta">Modalidade 2</div>
+            <h3>Usucapião ordinária</h3>
+            <p>
+              Prazo menor que a extraordinária, mas exige <strong>justo título</strong>
+              (algum documento, mesmo que viciado) e <strong>boa-fé</strong>.
+            </p>
+            <ul>
+              <li><strong>Prazo:</strong> 10 anos (ou 5 se houver moradia habitual)</li>
+              <li><strong>Requisitos extra:</strong> justo título + boa-fé</li>
+              <li><strong>Quando usar:</strong> quando você comprou o imóvel mas a escritura nunca foi registrada, ou foi feita por quem não era dono</li>
+            </ul>
+          </div>
+
+          <div class="modality-card">
+            <div class="modality-meta">Modalidade 3</div>
+            <h3>Usucapião especial (urbana ou rural)</h3>
+            <p>
+              Criada pela Constituição de 1988. Prazo curto, mas restrita a imóveis
+              de pequeno porte ocupados por pessoas sem outra propriedade.
+            </p>
+            <ul>
+              <li><strong>Prazo:</strong> 5 anos</li>
+              <li><strong>Requisitos extra (urbana):</strong> imóvel até 250m², morar no imóvel, não ter outra propriedade</li>
+              <li><strong>Requisitos extra (rural):</strong> imóvel até 50 hectares, produzir e morar no imóvel, não ter outra propriedade</li>
+              <li><strong>Quando usar:</strong> imóvel pequeno usado como moradia única</li>
+            </ul>
+          </div>
+
+          <div class="modality-card">
+            <div class="modality-meta">Modalidade 4</div>
+            <h3>Usucapião familiar</h3>
+            <p>
+              Modalidade introduzida pelo Código Civil em 2011 (art. 1.240-A).
+              Pensada pra situações em que um cônjuge abandona o lar e o outro
+              fica anos no imóvel.
+            </p>
+            <ul>
+              <li><strong>Prazo:</strong> 2 anos</li>
+              <li><strong>Requisitos extra:</strong> ex-cônjuge ou ex-companheiro abandonou o lar, posse exclusiva do outro, imóvel urbano até 250m², não ter outra propriedade</li>
+              <li><strong>Quando usar:</strong> casos de abandono do lar conjugal há mais de 2 anos</li>
+            </ul>
+          </div>
+
+          <h2>Judicial ou extrajudicial?</h2>
+
+          <p>
+            Desde 2015 (Novo CPC, art. 1.071), a usucapião pode ser feita
+            <strong>diretamente em cartório</strong>, sem ir ao Juiz. Os requisitos:
+          </p>
+
+          <ul>
+            <li>Acordo de todos os confrontantes (vizinhos do imóvel) sobre as divisas</li>
+            <li>Anuência do antigo proprietário (ou citação dele, se desconhecido)</li>
+            <li>Ata notarial atestando o tempo de posse</li>
+            <li>Documentos básicos do imóvel</li>
+          </ul>
+
+          <p>
+            Na prática, o caminho extrajudicial só dá certo quando há consenso
+            absoluto. Se algum vizinho contestar a divisa, ou se o antigo dono
+            aparecer disputando, a ação retorna para o judicial.
+          </p>
+
+          <h2>Custos típicos</h2>
+
+          <p>
+            O custo varia conforme o valor do imóvel e o estado, mas em média:
+          </p>
+
+          <ul>
+            <li><strong>Ação judicial:</strong> 2% a 4% do valor do imóvel em custas + honorários</li>
+            <li><strong>Procedimento extrajudicial:</strong> 1% a 2,5% em emolumentos + honorários</li>
+            <li><strong>Ata notarial:</strong> R$ 500 a R$ 3.000</li>
+            <li><strong>Levantamento topográfico</strong> (memorial descritivo): R$ 1.000 a R$ 5.000</li>
+          </ul>
+
+          <h2>Quando procurar a banca</h2>
+
+          <p>
+            Antes de iniciar qualquer ação de usucapião, é essencial fazer um
+            <strong>diagnóstico</strong> do imóvel: tempo real de posse, situação
+            cartorial, identidade do proprietário registrado, eventual conflito
+            de divisas. Esse diagnóstico evita prosseguir num caminho que vai
+            falhar.
+          </p>
+
+          <p>
+            Se você ocupa um imóvel há anos e quer regularizar, fale com a banca —
+            avaliamos a viabilidade da usucapião no seu caso e indicamos a
+            modalidade aplicável.
+          </p>
+        </div>
+
+        <div class="mt-16 p-8 bg-dark text-light rounded-2xl text-center">
+          <h2 class="font-serif text-2xl mb-3">Quer regularizar um imóvel por usucapião?</h2>
+          <p class="text-light-soft mb-6">
+            Converse diretamente com a banca pelo WhatsApp.
+          </p>
+          <button type="button" onclick="openWhatsAppModal()" class="inline-flex items-center gap-2 btn-primary px-6 py-3 rounded-full font-semibold">
+            Falar no WhatsApp
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="bg-darkest border-t text-light-soft text-sm" style="border-color: var(--border-soft-dark);">
+    <div class="max-w-6xl mx-auto px-6 py-12 text-center">
+      <img src="../logo-np.png" alt="Nogueira Porto Advocacia" class="h-20 w-auto mx-auto mb-3" />
+      <div class="text-[11px] uppercase tracking-[0.2em] text-accent mb-4">Direito Imobiliário, Registral e Notarial</div>
+      <p class="text-xs text-light-soft-2">© 2026 Nogueira Porto Advogados. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <button type="button" onclick="openWhatsAppModal()" aria-label="Falar no WhatsApp" class="fixed bottom-6 right-6 z-50">
+    <span class="wa-pulse relative inline-flex w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 grid place-items-center shadow-2xl">
+      <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20.52 3.48A12 12 0 003.45 20.42L2 22l1.66-1.42a12 12 0 0016.86-17.1zM12 20a8 8 0 01-4.07-1.11l-.29-.17-3 .8.8-2.92-.18-.3A8 8 0 1112 20z" />
+      </svg>
+    </span>
+  </button>
+
+  <button class="palette-switch" onclick="togglePalette()">
+    <span class="palette-dot"></span>
+    <span id="paletteLabel">Marinho clássico</span>
+    <svg class="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9M21 3v6h-6" /></svg>
+  </button>
+
+  <script>
+    const PALETTE_CYCLE = {
+      navy:    { next: 'emerald', label: 'Verde institucional' },
+      emerald: { next: 'black',   label: 'Preto & Dourado' },
+      black:   { next: 'navy',    label: 'Marinho clássico' },
+    };
+    function togglePalette() {
+      const root = document.documentElement;
+      const label = document.getElementById('paletteLabel');
+      const current = root.dataset.palette || 'navy';
+      const transition = PALETTE_CYCLE[current];
+      root.dataset.palette = transition.next;
+      label.textContent = transition.label;
+    }
+    function openWhatsAppModal() {
+      window.location.href = '../index.html#contato';
+    }
+  </script>
+</body>
+</html>

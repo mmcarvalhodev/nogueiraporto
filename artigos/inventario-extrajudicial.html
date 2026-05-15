@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-palette="navy">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventário extrajudicial — Nogueira Porto Advogados</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #fbf8f3;
+      --bg-page-2: #f5efe5;
+      --bg-dark: #0c1f3d;
+      --bg-dark-2: #142c4c;
+      --bg-darkest: #0a1729;
+      --text-light: #fbf8f3;
+      --text-light-soft: rgba(245, 239, 229, 0.8);
+      --text-light-soft-2: rgba(245, 239, 229, 0.6);
+      --text-dark: #2c3530;
+      --text-darker: #111915;
+      --accent: #c9a961;
+      --accent-hover: #b8985a;
+      --accent-soft: #d4b06a;
+      --accent-bright: #ffaa3a;
+      --border-soft: #d4e2f0;
+      --border-soft-dark: rgba(251, 248, 243, 0.1);
+    }
+    [data-palette="emerald"] {
+      --bg-page: #f5f0e8;
+      --bg-page-2: #ebe3d5;
+      --bg-dark: #064e3b;
+      --bg-dark-2: #065f46;
+      --bg-darkest: #033324;
+      --text-light: #f5f0e8;
+      --text-light-soft: rgba(245, 240, 232, 0.8);
+      --text-light-soft-2: rgba(245, 240, 232, 0.6);
+      --text-dark: #1f2937;
+      --text-darker: #0f1419;
+      --accent: #b08d57;
+      --accent-hover: #9a7a4a;
+      --accent-soft: #c5a572;
+      --accent-bright: #d4ad6f;
+      --border-soft: #d6cab8;
+      --border-soft-dark: rgba(245, 240, 232, 0.1);
+    }
+    [data-palette="black"] {
+      --bg-page: #f8f5ed;
+      --bg-page-2: #ede8d8;
+      --bg-dark: #0a0a0a;
+      --bg-dark-2: #1a1a1a;
+      --bg-darkest: #000000;
+      --text-light: #f8f5ed;
+      --text-light-soft: rgba(248, 245, 237, 0.8);
+      --text-light-soft-2: rgba(248, 245, 237, 0.6);
+      --text-dark: #1a1a1a;
+      --text-darker: #000000;
+      --accent: #c9a161;
+      --accent-hover: #b8915a;
+      --accent-soft: #d4b078;
+      --accent-bright: #e8c87d;
+      --border-soft: #d6cab8;
+      --border-soft-dark: rgba(248, 245, 237, 0.1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-page);
+      color: var(--text-darker);
+      font-family: 'Inter', system-ui, sans-serif;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    .font-serif { font-family: 'Cormorant Garamond', serif; }
+    .bg-page { background: var(--bg-page); }
+    .bg-dark { background: var(--bg-dark); }
+    .bg-darkest { background: var(--bg-darkest); }
+    .text-light { color: var(--text-light); }
+    .text-light-soft { color: var(--text-light-soft); }
+    .text-light-soft-2 { color: var(--text-light-soft-2); }
+    .text-dark { color: var(--text-dark); }
+    .text-accent { color: var(--accent); }
+    .bg-accent { background: var(--accent); }
+    .btn-primary { background: var(--accent); color: var(--bg-dark); transition: background 0.2s ease; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-dark { background: var(--bg-dark-2); color: var(--text-light); transition: background 0.2s ease; }
+    .btn-dark:hover { background: var(--bg-dark); }
+    .gold-rule { background: linear-gradient(90deg, transparent, var(--accent), transparent); height: 1px; }
+
+    .prose-custom h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--bg-dark);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+    .prose-custom h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--bg-dark);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+    .prose-custom p {
+      color: var(--text-dark);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .prose-custom strong { color: var(--bg-dark); font-weight: 600; }
+    .prose-custom ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: 1.25rem;
+    }
+    .prose-custom ul li { margin-bottom: 0.5rem; line-height: 1.7; }
+    .prose-custom blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.25rem;
+      font-style: italic;
+      color: var(--text-dark);
+      margin: 1.5rem 0;
+    }
+    .prose-custom table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .prose-custom th, .prose-custom td {
+      padding: 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border-soft);
+    }
+    .prose-custom th {
+      background: var(--bg-page-2);
+      color: var(--bg-dark);
+      font-weight: 600;
+    }
+
+    .wa-pulse::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 9999px;
+      background: #22c55e;
+      opacity: 0.35;
+      animation: wa-pulse 2s infinite;
+    }
+    @keyframes wa-pulse {
+      0% { transform: scale(0.95); opacity: 0.5; }
+      70% { transform: scale(1.3); opacity: 0; }
+      100% { opacity: 0; }
+    }
+    .palette-switch {
+      position: fixed; bottom: 24px; left: 24px; z-index: 60;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px; border-radius: 9999px;
+      background: var(--bg-dark); color: var(--text-light);
+      border: 1px solid var(--accent);
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      cursor: pointer; box-shadow: 0 8px 24px -8px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, background 0.5s ease;
+    }
+    .palette-switch:hover { transform: translateY(-2px); }
+    .palette-dot {
+      width: 14px; height: 14px; border-radius: 9999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 2px var(--bg-dark), 0 0 0 3px var(--accent);
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col antialiased">
+
+  <header class="sticky top-0 z-40 backdrop-blur border-b" style="background: rgba(251, 248, 243, 0.9); border-color: var(--border-soft);">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center">
+        <img src="../logo-np.png" alt="Nogueira Porto Advocacia" class="h-16 w-auto" style="filter: drop-shadow(0 0 2px rgba(12,31,61,0.25));" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--text-dark);">
+        <a href="../index.html#areas" class="hover:opacity-70">Áreas</a>
+        <a href="../index.html#equipe" class="hover:opacity-70">Equipe</a>
+        <a href="../index.html#quando" class="hover:opacity-70">Sobre</a>
+        <a href="../index.html#faq" class="hover:opacity-70">FAQ</a>
+        <a href="../index.html#artigos" class="hover:opacity-70">Artigos</a>
+      </nav>
+      <button type="button" onclick="openWhatsAppModal()" class="hidden md:inline-flex items-center gap-2 btn-dark px-4 py-2 rounded-full text-sm font-medium">
+        Falar agora
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1">
+    <article class="py-16">
+      <div class="max-w-3xl mx-auto px-6">
+        <a href="../index.html#artigos" class="text-sm inline-flex items-center gap-2 mb-8 hover:opacity-70" style="color: var(--text-dark);">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+          Voltar para os artigos
+        </a>
+
+        <div class="text-xs uppercase tracking-widest text-accent mb-3">Sucessões · Imobiliário</div>
+        <h1 class="font-serif text-3xl md:text-4xl leading-tight mb-4" style="color: var(--bg-dark);">
+          Inventário extrajudicial: quando vale a pena fazer em cartório
+        </h1>
+        <div class="text-sm mb-10" style="color: var(--text-dark); opacity: 0.6;">
+          Publicado em 13 de maio de 2026 · 6 min de leitura · Por Joyce Philot Porto
+        </div>
+
+        <div class="aspect-[16/9] rounded-2xl overflow-hidden mb-12 relative">
+          <img
+            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1400&q=80"
+            alt="Documentos sobre mesa antiga"
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.3) 100%);"></div>
+        </div>
+
+        <div class="prose-custom">
+          <p>
+            Por décadas, abrir inventário era sinônimo de processo judicial — com
+            anos esperando em fila no fórum, advogado, custas, audiências, herdeiros
+            ansiosos e bens parados. A <strong>Lei 11.441/2007</strong> mudou esse
+            cenário ao permitir que o inventário fosse feito diretamente em
+            cartório, em semanas, desde que cumpridos alguns requisitos.
+          </p>
+
+          <p>
+            Quase 20 anos depois, ainda encontramos famílias que vão direto pro
+            judicial por desconhecimento. Vamos esclarecer quando o caminho
+            extrajudicial é viável, como funciona e qual é a economia real.
+          </p>
+
+          <h2>O que é o inventário extrajudicial</h2>
+
+          <p>
+            É a forma de transferir os bens deixados pelo falecido (herança)
+            diretamente aos herdeiros, sem passar pela Justiça. O ato é lavrado em
+            <strong>escritura pública</strong> no Tabelionato de Notas, com base em
+            documentos apresentados pelas partes e pelo advogado.
+          </p>
+
+          <p>
+            A escritura tem o mesmo valor jurídico de uma sentença judicial de
+            partilha — registra-se em cartório de imóveis (no caso de bens
+            imóveis), no DETRAN (no caso de veículos), nos bancos (no caso de
+            contas e investimentos), e a transferência é concluída.
+          </p>
+
+          <h2>Quando é possível usar o caminho extrajudicial</h2>
+
+          <p>Os requisitos básicos são quatro:</p>
+
+          <ul>
+            <li><strong>Todos os herdeiros são maiores de idade</strong> (e capazes).</li>
+            <li><strong>Há consenso entre os herdeiros</strong> quanto à partilha — não há disputa.</li>
+            <li><strong>Não há testamento</strong> (com exceções recentes em casos específicos validados pelo CNJ).</li>
+            <li><strong>Todas as partes estão representadas por advogado(s)</strong> — pode ser o mesmo profissional, se não houver conflito de interesse.</li>
+          </ul>
+
+          <blockquote>
+            Se algum herdeiro for menor de idade, incapaz ou se houver disputa
+            quanto à partilha, o caminho obrigatório é o judicial.
+          </blockquote>
+
+          <h2>Quanto tempo demora um e outro?</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Etapa</th>
+                <th>Extrajudicial (cartório)</th>
+                <th>Judicial (fórum)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Reunião documental</td>
+                <td>2 a 4 semanas</td>
+                <td>2 a 4 semanas</td>
+              </tr>
+              <tr>
+                <td>Análise e protocolo</td>
+                <td>1 a 2 semanas</td>
+                <td>1 a 6 meses (até despachar)</td>
+              </tr>
+              <tr>
+                <td>Lavratura / sentença</td>
+                <td>2 a 4 semanas</td>
+                <td>6 meses a vários anos</td>
+              </tr>
+              <tr>
+                <td><strong>Total estimado</strong></td>
+                <td><strong>1 a 3 meses</strong></td>
+                <td><strong>8 meses a 5+ anos</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>E os custos?</h2>
+
+          <p>
+            O <strong>ITCMD</strong> (imposto estadual sobre transmissão causa mortis)
+            é igual nos dois caminhos — varia de 4% a 8% conforme o estado e o
+            valor do patrimônio. Esse não muda.
+          </p>
+
+          <p>O que muda:</p>
+
+          <ul>
+            <li><strong>Custas judiciais</strong> (no judicial): variam por estado, geralmente 1% a 2% do valor da herança.</li>
+            <li><strong>Emolumentos cartoriais</strong> (no extrajudicial): tabela tabelada por estado, costuma ser menor.</li>
+            <li><strong>Honorários advocatícios</strong>: tendem a ser menores no extrajudicial pela complexidade reduzida.</li>
+          </ul>
+
+          <p>
+            Na prática, o inventário extrajudicial custa <strong>30% a 50% menos</strong>
+            que o judicial — e leva uma fração do tempo. Para famílias em consenso
+            com herdeiros maiores, é quase sempre o caminho recomendado.
+          </p>
+
+          <h2>Documentos necessários</h2>
+
+          <p>Os principais documentos pra abrir o inventário extrajudicial:</p>
+
+          <ul>
+            <li>Certidão de óbito do falecido</li>
+            <li>RG, CPF e certidão de casamento/nascimento de todos os herdeiros</li>
+            <li>Certidão de propriedade de imóveis (matrícula atualizada)</li>
+            <li>Documentos de veículos (DUT)</li>
+            <li>Extratos bancários, declarações de IR dos últimos exercícios</li>
+            <li>Certidão negativa de débitos federais e estaduais</li>
+            <li>Avaliação dos bens (formal ou informal, conforme o cartório)</li>
+          </ul>
+
+          <h2>Quando procurar a banca</h2>
+
+          <p>
+            Após o falecimento, o prazo legal para abrir inventário é de
+            <strong>60 dias</strong>. Passado esse prazo, incide multa sobre o
+            ITCMD em vários estados. Pra evitar essa cobrança extra, vale procurar
+            assessoria jurídica logo nas primeiras semanas.
+          </p>
+
+          <p>
+            Se você tem uma situação envolvendo sucessão e quer entender o
+            caminho certo para o seu caso, fale com a banca — a primeira
+            orientação é gratuita.
+          </p>
+        </div>
+
+        <div class="mt-16 p-8 bg-dark text-light rounded-2xl text-center">
+          <h2 class="font-serif text-2xl mb-3">Tem dúvidas sobre sucessão ou inventário?</h2>
+          <p class="text-light-soft mb-6">
+            Converse diretamente com a banca pelo WhatsApp.
+          </p>
+          <button type="button" onclick="openWhatsAppModal()" class="inline-flex items-center gap-2 btn-primary px-6 py-3 rounded-full font-semibold">
+            Falar no WhatsApp
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="bg-darkest border-t text-light-soft text-sm" style="border-color: var(--border-soft-dark);">
+    <div class="max-w-6xl mx-auto px-6 py-12 text-center">
+      <img src="../logo-np.png" alt="Nogueira Porto Advocacia" class="h-20 w-auto mx-auto mb-3" />
+      <div class="text-[11px] uppercase tracking-[0.2em] text-accent mb-4">Direito Imobiliário, Registral e Notarial</div>
+      <p class="text-xs text-light-soft-2">© 2026 Nogueira Porto Advogados. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <button type="button" onclick="openWhatsAppModal()" aria-label="Falar no WhatsApp" class="fixed bottom-6 right-6 z-50">
+    <span class="wa-pulse relative inline-flex w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 grid place-items-center shadow-2xl">
+      <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20.52 3.48A12 12 0 003.45 20.42L2 22l1.66-1.42a12 12 0 0016.86-17.1zM12 20a8 8 0 01-4.07-1.11l-.29-.17-3 .8.8-2.92-.18-.3A8 8 0 1112 20z" />
+      </svg>
+    </span>
+  </button>
+
+  <button class="palette-switch" onclick="togglePalette()">
+    <span class="palette-dot"></span>
+    <span id="paletteLabel">Marinho clássico</span>
+    <svg class="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9M21 3v6h-6" /></svg>
+  </button>
+
+  <script>
+    const PALETTE_CYCLE = {
+      navy:    { next: 'emerald', label: 'Verde institucional' },
+      emerald: { next: 'black',   label: 'Preto & Dourado' },
+      black:   { next: 'navy',    label: 'Marinho clássico' },
+    };
+    function togglePalette() {
+      const root = document.documentElement;
+      const label = document.getElementById('paletteLabel');
+      const current = root.dataset.palette || 'navy';
+      const transition = PALETTE_CYCLE[current];
+      root.dataset.palette = transition.next;
+      label.textContent = transition.label;
+    }
+    function openWhatsAppModal() {
+      window.location.href = '../index.html#contato';
+    }
+  </script>
+</body>
+</html>
