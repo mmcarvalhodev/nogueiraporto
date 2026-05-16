@@ -1,68 +1,143 @@
-// Mock data inicial — será substituído por queries ao Neon na Fase 2 (admin).
-// O schema final terá esses campos + photoUrl, bio, displayOrder, isActive.
+import { sql } from "./db";
 
 export type TeamMember = {
-  id: string;
+  id: number;
   name: string;
   role: string;
-  initials: string;
-  photoUrl?: string | null;
-  oab?: string[];
-  bio?: string;
+  oabCredentials: string[];
+  photoUrl: string | null;
+  initials: string | null;
+  bio: string | null;
   displayOrder: number;
+  isActive: boolean;
 };
 
-export const teamMembers: TeamMember[] = [
-  {
-    id: "fabiano",
-    name: "Fabiano Nogueira Porto",
-    role: "Sócio fundador",
-    initials: "FP",
-    oab: ["OAB/RJ 136.764", "OAB/ES 40.045"],
-    displayOrder: 1,
-  },
-  {
-    id: "joyce",
-    name: "Joyce Philot Porto",
-    role: "Sócia",
-    initials: "JP",
-    oab: ["OAB/ES 39.084"],
-    displayOrder: 2,
-  },
-  {
-    id: "adriana",
-    name: "Adriana Monteiro",
-    role: "Advogada",
-    initials: "AM",
-    oab: ["OAB/RJ 219.879"],
-    displayOrder: 3,
-  },
-  {
-    id: "regiane",
-    name: "Regiane Negreiro",
-    role: "Advogada",
-    initials: "RN",
-    oab: ["OAB/RJ 246.420"],
-    displayOrder: 4,
-  },
-  {
-    id: "mariana",
-    name: "Mariana Silva",
-    role: "Assistente Jurídica",
-    initials: "MS",
-    bio: "Atendimento ao cliente, organização de processos e acompanhamento de prazos.",
-    displayOrder: 5,
-  },
-  {
-    id: "carla",
-    name: "Carla Santos",
-    role: "Secretária",
-    initials: "CS",
-    bio: "Agenda, recepção, documentação e suporte administrativo aos dois escritórios.",
-    displayOrder: 6,
-  },
-];
+type DbRow = {
+  id: number;
+  name: string;
+  role: string;
+  oab_credentials: string[] | null;
+  photo_url: string | null;
+  initials: string | null;
+  bio: string | null;
+  display_order: number;
+  is_active: boolean;
+};
 
-export function getActiveTeam(): TeamMember[] {
-  return [...teamMembers].sort((a, b) => a.displayOrder - b.displayOrder);
+function toMember(r: DbRow): TeamMember {
+  return {
+    id: r.id,
+    name: r.name,
+    role: r.role,
+    oabCredentials: r.oab_credentials ?? [],
+    photoUrl: r.photo_url,
+    initials: r.initials,
+    bio: r.bio,
+    displayOrder: r.display_order,
+    isActive: r.is_active,
+  };
+}
+
+export async function getActiveTeam(): Promise<TeamMember[]> {
+  const rows = (await sql`
+    SELECT id, name, role, oab_credentials, photo_url, initials, bio,
+           display_order, is_active
+    FROM team_members
+    WHERE is_active = TRUE
+    ORDER BY display_order ASC, id ASC
+  `) as DbRow[];
+  return rows.map(toMember);
+}
+
+export async function getAllTeam(): Promise<TeamMember[]> {
+  const rows = (await sql`
+    SELECT id, name, role, oab_credentials, photo_url, initials, bio,
+           display_order, is_active
+    FROM team_members
+    ORDER BY display_order ASC, id ASC
+  `) as DbRow[];
+  return rows.map(toMember);
+}
+
+export async function getTeamMemberById(
+  id: number
+): Promise<TeamMember | null> {
+  const rows = (await sql`
+    SELECT id, name, role, oab_credentials, photo_url, initials, bio,
+           display_order, is_active
+    FROM team_members
+    WHERE id = ${id}
+    LIMIT 1
+  `) as DbRow[];
+  if (rows.length === 0) return null;
+  return toMember(rows[0]);
+}
+
+export type TeamMemberInput = {
+  name: string;
+  role: string;
+  oabCredentials: string[];
+  photoUrl?: string | null;
+  initials?: string | null;
+  bio?: string | null;
+  displayOrder?: number;
+  isActive?: boolean;
+};
+
+export async function createTeamMember(
+  input: TeamMemberInput
+): Promise<number> {
+  const rows = (await sql`
+    INSERT INTO team_members
+      (name, role, oab_credentials, photo_url, initials, bio,
+       display_order, is_active)
+    VALUES (
+      ${input.name},
+      ${input.role},
+      ${input.oabCredentials},
+      ${input.photoUrl ?? null},
+      ${input.initials ?? null},
+      ${input.bio ?? null},
+      ${input.displayOrder ?? 999},
+      ${input.isActive ?? true}
+    )
+    RETURNING id
+  `) as { id: number }[];
+  return rows[0].id;
+}
+
+export async function updateTeamMember(
+  id: number,
+  input: TeamMemberInput
+): Promise<void> {
+  await sql`
+    UPDATE team_members
+    SET
+      name            = ${input.name},
+      role            = ${input.role},
+      oab_credentials = ${input.oabCredentials},
+      photo_url       = ${input.photoUrl ?? null},
+      initials        = ${input.initials ?? null},
+      bio             = ${input.bio ?? null},
+      display_order   = ${input.displayOrder ?? 999},
+      is_active       = ${input.isActive ?? true},
+      updated_at      = NOW()
+    WHERE id = ${id}
+  `;
+}
+
+export async function deleteTeamMember(id: number): Promise<void> {
+  await sql`DELETE FROM team_members WHERE id = ${id}`;
+}
+
+export async function reorderTeamMembers(
+  orderedIds: number[]
+): Promise<void> {
+  for (let i = 0; i < orderedIds.length; i++) {
+    await sql`
+      UPDATE team_members
+      SET display_order = ${i + 1}, updated_at = NOW()
+      WHERE id = ${orderedIds[i]}
+    `;
+  }
 }

@@ -3,8 +3,7 @@ import { Inter, Cormorant_Garamond } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsapp from "@/components/FloatingWhatsapp";
-import PaletteSwitcher from "@/components/PaletteSwitcher";
-import LogoEffectControl from "@/components/LogoEffectControl";
+import { getSiteSettings } from "@/lib/settings";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -58,15 +57,17 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSiteSettings();
+
   return (
     <html
       lang="pt-BR"
-      data-palette="navy"
+      data-palette={settings.palette}
       className={`${inter.variable} ${cormorant.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
@@ -74,9 +75,6 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <FloatingWhatsapp />
-        {/* Controles temporários — vão sair quando o admin substituir (Fase 2) */}
-        <LogoEffectControl />
-        <PaletteSwitcher />
       </body>
     </html>
   );

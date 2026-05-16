@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/posts";
 import { site } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
 
   return [
     {
@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...posts.map((p) => ({
       url: `${site.url}/artigos/${p.slug}`,
-      lastModified: new Date(p.date),
+      lastModified: p.date ? new Date(p.date) : now,
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),

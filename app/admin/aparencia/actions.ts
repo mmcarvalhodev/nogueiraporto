@@ -1,0 +1,61 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { getSession } from "@/lib/auth";
+import {
+  updateSiteSettings,
+  type Palette,
+  type HeroMode,
+  type HeroEntrance,
+  type HeroIdle,
+} from "@/lib/settings";
+
+const PALETTES: Palette[] = ["navy", "emerald", "black"];
+const HERO_MODES: HeroMode[] = ["logo", "image"];
+const ENTRANCES: HeroEntrance[] = [
+  "none",
+  "fade",
+  "slide",
+  "zoom",
+  "rotate",
+  "spin",
+];
+const IDLES: HeroIdle[] = ["none", "float", "pulse", "slowrotate"];
+
+export async function saveAppearance(formData: FormData) {
+  const session = await getSession();
+  if (!session) redirect("/login");
+
+  const palette = String(formData.get("palette") ?? "") as Palette;
+  const heroMode = String(formData.get("heroMode") ?? "") as HeroMode;
+  const heroImageUrl = String(formData.get("heroImageUrl") ?? "").trim();
+  const heroLogoEntrance = String(
+    formData.get("heroLogoEntrance") ?? ""
+  ) as HeroEntrance;
+  const heroLogoIdle = String(formData.get("heroLogoIdle") ?? "") as HeroIdle;
+
+  if (!PALETTES.includes(palette)) {
+    redirect("/admin/aparencia?error=palette");
+  }
+  if (!HERO_MODES.includes(heroMode)) {
+    redirect("/admin/aparencia?error=heroMode");
+  }
+  if (!ENTRANCES.includes(heroLogoEntrance)) {
+    redirect("/admin/aparencia?error=entrance");
+  }
+  if (!IDLES.includes(heroLogoIdle)) {
+    redirect("/admin/aparencia?error=idle");
+  }
+
+  await updateSiteSettings({
+    palette,
+    heroMode,
+    heroImageUrl,
+    heroLogoEntrance,
+    heroLogoIdle,
+  });
+
+  revalidatePath("/", "layout");
+  redirect("/admin/aparencia?saved=1");
+}

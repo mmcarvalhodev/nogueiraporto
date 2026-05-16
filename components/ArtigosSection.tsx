@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts, formatDate } from "@/lib/posts";
 
-export default function ArtigosSection() {
-  const posts = getAllPosts().slice(0, 2);
+export default async function ArtigosSection() {
+  const posts = (await getAllPosts()).slice(0, 2);
+
+  if (posts.length === 0) return null;
 
   return (
     <section id="artigos" className="py-16 md:py-24">

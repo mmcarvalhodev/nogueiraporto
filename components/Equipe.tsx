@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { getActiveTeam } from "@/lib/team";
 
-export default function Equipe() {
-  const team = getActiveTeam();
+export default async function Equipe() {
+  const team = await getActiveTeam();
 
   return (
     <section id="equipe" className="py-16 md:py-24 bg-page-2">
@@ -47,7 +47,7 @@ export default function Equipe() {
                   />
                 ) : (
                   <div className="font-serif text-7xl text-accent">
-                    {m.initials}
+                    {m.initials || m.name.charAt(0)}
                   </div>
                 )}
               </div>
@@ -61,12 +61,12 @@ export default function Equipe() {
                 >
                   {m.name}
                 </h3>
-                {m.oab && m.oab.length > 0 ? (
+                {m.oabCredentials.length > 0 ? (
                   <div
                     className="text-xs leading-relaxed border-t pt-3 mt-3 text-dark"
                     style={{ borderColor: "var(--border-soft)" }}
                   >
-                    {m.oab.map((credential) => (
+                    {m.oabCredentials.map((credential) => (
                       <div
                         key={credential}
                         className="text-accent font-medium mb-0.5"

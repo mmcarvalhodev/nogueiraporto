@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     "Artigos, análises e atualizações de jurisprudência escritas pela equipe da Nogueira Porto Advogados.",
 };
 
-export default function ArtigosListPage() {
-  const posts = getAllPosts();
+export default async function ArtigosListPage() {
+  const posts = await getAllPosts();
 
   return (
     <section className="py-16 md:py-24">

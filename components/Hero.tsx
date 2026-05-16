@@ -1,7 +1,11 @@
 import Image from "next/image";
 import WhatsAppCTA from "./WhatsAppCTA";
+import { getSiteSettings } from "@/lib/settings";
 
-export default function Hero() {
+export default async function Hero() {
+  const settings = await getSiteSettings();
+  const useImage = settings.heroMode === "image" && settings.heroImageUrl;
+
   return (
     <section className="hero-grad text-light relative">
       <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-12 gap-10 items-center">
@@ -66,26 +70,76 @@ export default function Hero() {
 
         <div className="md:col-span-5 hidden md:block">
           <div
-            className="aspect-[4/5] rounded-2xl overflow-hidden border shadow-2xl relative bg-dark flex items-center justify-center p-12"
+            className="aspect-[4/5] rounded-2xl overflow-hidden border shadow-2xl relative"
             style={{
               borderColor: "var(--accent)",
               borderWidth: "1px",
+              background: useImage ? "transparent" : "var(--bg-dark)",
             }}
           >
-            <Image
-              src="/images/logo-np.png"
-              alt="Nogueira Porto Advocacia"
-              width={280}
-              height={280}
-              priority
-              className="hero-logo w-full h-auto max-w-[280px]"
-              style={{
-                filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.4))",
-              }}
-            />
+            {useImage ? (
+              <Image
+                src={settings.heroImageUrl}
+                alt="Nogueira Porto Advocacia"
+                fill
+                sizes="(max-width: 768px) 0px, 40vw"
+                priority
+                className="object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center p-12">
+                <Image
+                  src="/images/logo-np.png"
+                  alt="Nogueira Porto Advocacia"
+                  width={280}
+                  height={280}
+                  priority
+                  className="hero-logo w-full h-auto max-w-[280px]"
+                  style={{
+                    filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.4))",
+                    animation: buildAnimation(
+                      settings.heroLogoEntrance,
+                      settings.heroLogoIdle
+                    ),
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
+}
+
+function buildAnimation(
+  entrance: string,
+  idle: string
+): string | undefined {
+  const ENTRANCE: Record<
+    string,
+    { name: string; duration: string; easing: string }
+  > = {
+    fade: { name: "heroLogoFade", duration: "1.6s", easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
+    slide: { name: "heroLogoSlide", duration: "1.6s", easing: "cubic-bezier(0.16, 1, 0.3, 1)" },
+    zoom: { name: "heroLogoZoom", duration: "1.5s", easing: "cubic-bezier(0.34, 1.56, 0.64, 1)" },
+    rotate: { name: "heroLogoRotate", duration: "1.8s", easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
+    spin: { name: "heroLogoSpin", duration: "2.4s", easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
+  };
+  const IDLE: Record<string, { name: string; duration: string; easing: string }> = {
+    float: { name: "heroLogoFloat", duration: "5s", easing: "ease-in-out" },
+    pulse: { name: "heroLogoPulse", duration: "4s", easing: "ease-in-out" },
+    slowrotate: { name: "heroLogoSlowRotate", duration: "40s", easing: "linear" },
+  };
+
+  const parts: string[] = [];
+  const e = ENTRANCE[entrance];
+  const i = IDLE[idle];
+
+  if (e) parts.push(`${e.name} ${e.duration} ${e.easing} 0.25s 1 both`);
+  if (i) {
+    const delay = e ? `${parseFloat(e.duration) + 0.5}s` : "0s";
+    parts.push(`${i.name} ${i.duration} ${i.easing} ${delay} infinite`);
+  }
+  return parts.length > 0 ? parts.join(", ") : undefined;
 }

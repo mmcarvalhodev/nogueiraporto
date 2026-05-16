@@ -10,7 +10,8 @@ import { getAllSlugs, getPostBySlug, formatDate } from "@/lib/posts";
 type Params = { slug: string };
 
 export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+  const slugs = await getAllSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -19,7 +20,7 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -40,7 +41,7 @@ export default async function ArticlePage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
   return (
