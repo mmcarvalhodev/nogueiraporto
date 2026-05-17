@@ -26,7 +26,7 @@ export default async function Equipe() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {team.map((m) => (
             <article
               key={m.id}
@@ -34,7 +34,7 @@ export default async function Equipe() {
               style={{ borderColor: "var(--border-soft)" }}
             >
               <div
-                className="aspect-square grid place-items-center relative"
+                className="aspect-[3/4] grid place-items-center relative"
                 style={{ background: "var(--bg-dark)" }}
               >
                 {m.photoUrl ? (
@@ -42,11 +42,11 @@ export default async function Equipe() {
                     src={m.photoUrl}
                     alt={m.name}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
                     className="object-cover"
                   />
                 ) : (
-                  <div className="font-serif text-7xl text-accent">
+                  <div className="font-serif text-6xl text-accent">
                     {m.initials || m.name.charAt(0)}
                   </div>
                 )}
