@@ -52,12 +52,21 @@ export const metadata: Metadata = {
     title: `${site.name} — ${site.tagline}`,
     description:
       "Banca especializada em direito imobiliário, registral e notarial. Niterói e Vila Velha.",
+    images: [
+      {
+        url: "/images/logo-np.png",
+        width: 810,
+        height: 810,
+        alt: `${site.name} · Advocacia Imobiliária, Registral e Notarial`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — ${site.tagline}`,
     description:
       "Banca especializada em direito imobiliário, registral e notarial.",
+    images: ["/images/logo-np.png"],
   },
   robots: { index: true, follow: true },
 };
