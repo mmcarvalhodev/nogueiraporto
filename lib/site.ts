@@ -2,7 +2,11 @@ export const site = {
   name: "Nogueira Porto Advogados",
   shortName: "Nogueira Porto",
   tagline: "Direito Imobiliário, Registral e Notarial",
-  url: "https://www.nogueiraporto.adv.br",
+  // Enquanto Fabiano não aprovar e migrar o DNS, site.url precisa apontar
+  // pro preview do Netlify — senão og:image e canonical URL resolvem pro
+  // domínio final, que ainda hospeda o site antigo dele -> preview quebra.
+  // Quando migrar o DNS, trocar pra "https://www.nogueiraporto.adv.br".
+  url: "https://nogueiraporto-preview.netlify.app",
   email: "contato@nogueiraporto.adv.br",
   cnpj: null as string | null,
   offices: [
