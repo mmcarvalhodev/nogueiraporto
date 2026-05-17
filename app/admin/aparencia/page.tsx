@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ImageUpload from "@/components/admin/ImageUpload";
 import { getSiteSettings } from "@/lib/settings";
 import { saveAppearance } from "./actions";
 
@@ -179,37 +180,31 @@ export default async function AppearancePage({
 
             <div>
               <label
-                htmlFor="heroImageUrl"
-                className="block text-sm font-medium mb-1.5"
+                className="block text-sm font-medium mb-2"
                 style={{ color: "var(--bg-dark)" }}
               >
-                URL da imagem do hero{" "}
+                Imagem do hero{" "}
                 <span
                   className="font-normal text-dark"
                   style={{ opacity: 0.6 }}
                 >
                   (usada apenas se &quot;Imagem personalizada&quot; estiver
-                  selecionado acima)
+                  selecionada acima)
                 </span>
               </label>
-              <input
-                id="heroImageUrl"
+              <ImageUpload
                 name="heroImageUrl"
-                type="url"
-                placeholder="https://res.cloudinary.com/..."
+                context="hero"
+                aspectRatio="wide"
                 defaultValue={settings.heroImageUrl}
-                className="block w-full rounded-lg border px-3 py-2 text-sm"
-                style={{
-                  borderColor: "var(--border-soft)",
-                  background: "white",
-                }}
+                label="Selecionar imagem do hero"
               />
               <p
-                className="text-[11px] text-dark mt-1"
+                className="text-[11px] text-dark mt-2"
                 style={{ opacity: 0.6 }}
               >
-                Upload direto via Cloudinary será adicionado em breve. Por
-                ora, cole uma URL pública.
+                Faça upload direto do seu computador. Aceita JPG, PNG, WEBP
+                ou GIF, até 5MB. A imagem fica hospedada no Cloudinary.
               </p>
             </div>
           </div>
