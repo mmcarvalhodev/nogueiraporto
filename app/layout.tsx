@@ -7,6 +7,11 @@ import { getSiteSettings } from "@/lib/settings";
 import { site } from "@/lib/site";
 import "./globals.css";
 
+// Força server-side rendering em todas as páginas (lê DB a cada request).
+// Sem isso, Next.js gera estático e a paleta/efeitos/hero ficam "congelados"
+// no build, sem refletir alterações feitas pelo cliente no admin.
+export const dynamic = "force-dynamic";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
