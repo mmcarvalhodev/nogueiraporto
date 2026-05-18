@@ -7,10 +7,12 @@ import { getSiteSettings } from "@/lib/settings";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-// Força server-side rendering em todas as páginas (lê DB a cada request).
-// Sem isso, Next.js gera estático e a paleta/efeitos/hero ficam "congelados"
-// no build, sem refletir alterações feitas pelo cliente no admin.
-export const dynamic = "force-dynamic";
+// Páginas públicas usam ISR (revalida em até 60s após mudança no admin).
+// O admin invoca revalidatePath() ao salvar, então a alteração propaga
+// imediatamente. Os 60s são um fallback caso a invalidação manual falhe.
+// Antes era `force-dynamic`, mas isso gerava 1 function invocation por
+// pageview — estourava o free tier do Netlify em poucas horas com bots.
+export const revalidate = 60;
 
 const inter = Inter({
   variable: "--font-inter",

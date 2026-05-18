@@ -3,6 +3,10 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { logout } from "../login/actions";
 
+// Admin precisa ler cookie de sessão a cada request — sempre dinâmico.
+// Sobrescreve o `revalidate = 60` do layout raiz.
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Administração",
   robots: { index: false, follow: false },

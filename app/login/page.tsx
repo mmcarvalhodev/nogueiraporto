@@ -2,6 +2,10 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { login } from "./actions";
 
+// Login lê cookie pra detectar se já tá logado e redirecionar.
+// Sempre dinâmico — sobrescreve revalidate do layout raiz.
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Entrar",
   robots: { index: false, follow: false },
