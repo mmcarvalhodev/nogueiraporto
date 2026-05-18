@@ -10,8 +10,15 @@ import { getAllSlugs, getPostBySlug, formatDate } from "@/lib/posts";
 type Params = { slug: string };
 
 export async function generateStaticParams() {
-  const slugs = await getAllSlugs();
-  return slugs.map((slug) => ({ slug }));
+  // Resiliente a falta de DATABASE_URL no build time: se o DB não estiver
+  // acessível, retorna lista vazia e Next gera as páginas on-demand (SSR).
+  try {
+    const slugs = await getAllSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch (err) {
+    console.warn("[artigos/[slug]] DB inacessível no build, fallback pra SSR:", err);
+    return [];
+  }
 }
 
 export async function generateMetadata({
