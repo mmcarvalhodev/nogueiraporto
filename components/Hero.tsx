@@ -1,6 +1,7 @@
 import Image from "next/image";
 import WhatsAppCTA from "./WhatsAppCTA";
 import { getSiteSettings } from "@/lib/settings";
+import { renderHeroHeading } from "@/lib/hero-text";
 
 export default async function Hero() {
   const settings = await getSiteSettings();
@@ -17,7 +18,7 @@ export default async function Hero() {
                 "0 1px 2px rgba(0,0,0,0.95), 0 2px 6px rgba(0,0,0,0.85), 0 4px 14px rgba(0,0,0,0.7)",
             }}
           >
-            Advocacia · Niterói e Vila Velha
+            {settings.heroEyebrow}
           </div>
           <h1
             className="font-serif font-semibold text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-5"
@@ -26,27 +27,13 @@ export default async function Hero() {
                 "0 1px 2px rgba(0,0,0,0.85), 0 2px 8px rgba(0,0,0,0.7), 0 4px 16px rgba(0,0,0,0.55)",
             }}
           >
-            Direito Imobiliário,
-            <br />
-            com tradição
-            <br />
-            <span
-              className="italic text-accent-bright"
-              style={{
-                textShadow:
-                  "0 2px 3px rgba(0,0,0,0.95), 0 4px 10px rgba(0,0,0,0.8), 0 8px 22px rgba(0,0,0,0.6)",
-              }}
-            >
-              registral e notarial.
-            </span>
+            {renderHeroHeading(settings.heroHeading)}
           </h1>
           <p
-            className="text-base md:text-lg font-medium text-light max-w-xl mb-8 leading-relaxed"
+            className="text-base md:text-lg font-medium text-light max-w-xl mb-8 leading-relaxed whitespace-pre-line"
             style={{ textShadow: "0 1px 4px rgba(0,0,0,0.4)" }}
           >
-            Banca especializada em direito imobiliário, registral e notarial,
-            com atuação judicial e extrajudicial em RJ e ES. Atendimento direto
-            com os sócios.
+            {settings.heroDescription}
           </p>
           <div className="flex flex-wrap gap-4">
             <WhatsAppCTA className="inline-flex items-center gap-2 btn-primary px-6 py-3 rounded-full font-semibold">

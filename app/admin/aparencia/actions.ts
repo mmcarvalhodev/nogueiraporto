@@ -34,6 +34,9 @@ export async function saveAppearance(formData: FormData) {
     formData.get("heroLogoEntrance") ?? ""
   ) as HeroEntrance;
   const heroLogoIdle = String(formData.get("heroLogoIdle") ?? "") as HeroIdle;
+  const heroEyebrow = String(formData.get("heroEyebrow") ?? "").trim();
+  const heroHeading = String(formData.get("heroHeading") ?? "").trim();
+  const heroDescription = String(formData.get("heroDescription") ?? "").trim();
 
   if (!PALETTES.includes(palette)) {
     redirect("/admin/aparencia?error=palette");
@@ -54,6 +57,9 @@ export async function saveAppearance(formData: FormData) {
     heroImageUrl,
     heroLogoEntrance,
     heroLogoIdle,
+    heroEyebrow,
+    heroHeading,
+    heroDescription,
   });
 
   revalidatePath("/", "layout");

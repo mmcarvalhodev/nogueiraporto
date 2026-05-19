@@ -115,7 +115,115 @@ export default async function AppearancePage({
           </div>
         </section>
 
-        {/* ============ HERO ============ */}
+        {/* ============ TEXTOS DO HERO ============ */}
+        <section
+          className="pt-6 border-t"
+          style={{ borderColor: "var(--border-soft)" }}
+        >
+          <h3
+            className="font-serif text-lg font-semibold mb-1"
+            style={{ color: "var(--bg-dark)" }}
+          >
+            Textos do hero
+          </h3>
+          <p className="text-xs text-dark mb-4" style={{ opacity: 0.7 }}>
+            Os 3 textos que aparecem no topo do site (à esquerda do card visual).
+          </p>
+
+          <div className="space-y-4">
+            <div>
+              <label
+                htmlFor="heroEyebrow"
+                className="block text-sm font-medium mb-1.5"
+                style={{ color: "var(--bg-dark)" }}
+              >
+                Texto pequeno superior{" "}
+                <span
+                  className="font-normal text-dark"
+                  style={{ opacity: 0.6 }}
+                >
+                  (eyebrow, todo em maiúsculas no site)
+                </span>
+              </label>
+              <input
+                id="heroEyebrow"
+                name="heroEyebrow"
+                type="text"
+                defaultValue={settings.heroEyebrow}
+                placeholder="Advocacia · Niterói e Vila Velha"
+                maxLength={80}
+                className="block w-full rounded-lg border px-3 py-2 text-sm"
+                style={{
+                  borderColor: "var(--border-soft)",
+                  background: "white",
+                }}
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="heroHeading"
+                className="block text-sm font-medium mb-1.5"
+                style={{ color: "var(--bg-dark)" }}
+              >
+                Título grande do hero
+              </label>
+              <textarea
+                id="heroHeading"
+                name="heroHeading"
+                rows={4}
+                defaultValue={settings.heroHeading}
+                placeholder={
+                  "Direito Imobiliário,\ncom tradição\n*registral e notarial*."
+                }
+                className="block w-full rounded-lg border px-3 py-2 text-sm font-serif"
+                style={{
+                  borderColor: "var(--border-soft)",
+                  background: "white",
+                }}
+              />
+              <p
+                className="text-[11px] text-dark mt-1.5 leading-relaxed"
+                style={{ opacity: 0.6 }}
+              >
+                Pressione Enter para quebrar linha. Coloque a parte em destaque
+                entre asteriscos: <code>*texto destacado*</code> — fica em
+                itálico dourado.
+              </p>
+            </div>
+
+            <div>
+              <label
+                htmlFor="heroDescription"
+                className="block text-sm font-medium mb-1.5"
+                style={{ color: "var(--bg-dark)" }}
+              >
+                Descrição (parágrafo abaixo do título)
+              </label>
+              <textarea
+                id="heroDescription"
+                name="heroDescription"
+                rows={4}
+                defaultValue={settings.heroDescription}
+                placeholder="Banca especializada em direito imobiliário, registral e notarial..."
+                className="block w-full rounded-lg border px-3 py-2 text-sm"
+                style={{
+                  borderColor: "var(--border-soft)",
+                  background: "white",
+                }}
+              />
+              <p
+                className="text-[11px] text-dark mt-1.5"
+                style={{ opacity: 0.6 }}
+              >
+                Quebras de linha são preservadas. Mantenha o texto enxuto
+                (idealmente até 3 linhas) para não estourar o layout.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ============ HERO (CARD VISUAL) ============ */}
         <section
           className="pt-6 border-t"
           style={{ borderColor: "var(--border-soft)" }}

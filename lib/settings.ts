@@ -17,6 +17,9 @@ export type SiteSettings = {
   heroImageUrl: string;
   heroLogoEntrance: HeroEntrance;
   heroLogoIdle: HeroIdle;
+  heroEyebrow: string;
+  heroHeading: string;
+  heroDescription: string;
 };
 
 const DEFAULTS: SiteSettings = {
@@ -25,6 +28,11 @@ const DEFAULTS: SiteSettings = {
   heroImageUrl: "",
   heroLogoEntrance: "slide",
   heroLogoIdle: "none",
+  heroEyebrow: "Advocacia · Niterói e Vila Velha",
+  heroHeading:
+    "Direito Imobiliário,\ncom tradição\n*registral e notarial*.",
+  heroDescription:
+    "Banca especializada em direito imobiliário, registral e notarial, com atuação judicial e extrajudicial em RJ e ES. Atendimento direto com os sócios.",
 };
 
 const KEY_MAP = {
@@ -33,6 +41,9 @@ const KEY_MAP = {
   heroImageUrl: "hero_image_url",
   heroLogoEntrance: "hero_logo_entrance",
   heroLogoIdle: "hero_logo_idle",
+  heroEyebrow: "hero_eyebrow",
+  heroHeading: "hero_heading",
+  heroDescription: "hero_description",
 } as const;
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -53,6 +64,10 @@ export async function getSiteSettings(): Promise<SiteSettings> {
         DEFAULTS.heroLogoEntrance,
       heroLogoIdle:
         (map.get(KEY_MAP.heroLogoIdle) as HeroIdle) || DEFAULTS.heroLogoIdle,
+      heroEyebrow: map.get(KEY_MAP.heroEyebrow) || DEFAULTS.heroEyebrow,
+      heroHeading: map.get(KEY_MAP.heroHeading) || DEFAULTS.heroHeading,
+      heroDescription:
+        map.get(KEY_MAP.heroDescription) || DEFAULTS.heroDescription,
     };
   } catch (err) {
     console.error(
@@ -81,6 +96,15 @@ export async function updateSiteSettings(
     });
   if (patch.heroLogoIdle !== undefined)
     updates.push({ key: KEY_MAP.heroLogoIdle, value: patch.heroLogoIdle });
+  if (patch.heroEyebrow !== undefined)
+    updates.push({ key: KEY_MAP.heroEyebrow, value: patch.heroEyebrow });
+  if (patch.heroHeading !== undefined)
+    updates.push({ key: KEY_MAP.heroHeading, value: patch.heroHeading });
+  if (patch.heroDescription !== undefined)
+    updates.push({
+      key: KEY_MAP.heroDescription,
+      value: patch.heroDescription,
+    });
 
   for (const { key, value } of updates) {
     await sql`
