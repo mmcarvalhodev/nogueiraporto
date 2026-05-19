@@ -37,6 +37,9 @@ export async function saveAppearance(formData: FormData) {
   const heroEyebrow = String(formData.get("heroEyebrow") ?? "").trim();
   const heroHeading = String(formData.get("heroHeading") ?? "").trim();
   const heroDescription = String(formData.get("heroDescription") ?? "").trim();
+  const instagramUrl = String(formData.get("instagramUrl") ?? "").trim();
+  const facebookUrl = String(formData.get("facebookUrl") ?? "").trim();
+  const linkedinUrl = String(formData.get("linkedinUrl") ?? "").trim();
 
   if (!PALETTES.includes(palette)) {
     redirect("/admin/aparencia?error=palette");
@@ -60,6 +63,9 @@ export async function saveAppearance(formData: FormData) {
     heroEyebrow,
     heroHeading,
     heroDescription,
+    instagramUrl,
+    facebookUrl,
+    linkedinUrl,
   });
 
   revalidatePath("/", "layout");

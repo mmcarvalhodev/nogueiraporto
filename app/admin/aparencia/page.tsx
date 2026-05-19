@@ -223,6 +223,97 @@ export default async function AppearancePage({
           </div>
         </section>
 
+        {/* ============ REDES SOCIAIS ============ */}
+        <section
+          className="pt-6 border-t"
+          style={{ borderColor: "var(--border-soft)" }}
+        >
+          <h3
+            className="font-serif text-lg font-semibold mb-1"
+            style={{ color: "var(--bg-dark)" }}
+          >
+            Redes sociais
+          </h3>
+          <p className="text-xs text-dark mb-4" style={{ opacity: 0.7 }}>
+            URLs das redes sociais do escritório. Os ícones aparecem no rodapé
+            do site apenas se o link estiver preenchido.
+          </p>
+
+          <div className="space-y-4">
+            <div>
+              <label
+                htmlFor="instagramUrl"
+                className="block text-sm font-medium mb-1.5"
+                style={{ color: "var(--bg-dark)" }}
+              >
+                Instagram
+              </label>
+              <input
+                id="instagramUrl"
+                name="instagramUrl"
+                type="url"
+                defaultValue={settings.instagramUrl}
+                placeholder="https://www.instagram.com/nogueiraportoadvogados/"
+                className="block w-full rounded-lg border px-3 py-2 text-sm"
+                style={{
+                  borderColor: "var(--border-soft)",
+                  background: "white",
+                }}
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="facebookUrl"
+                className="block text-sm font-medium mb-1.5"
+                style={{ color: "var(--bg-dark)" }}
+              >
+                Facebook
+              </label>
+              <input
+                id="facebookUrl"
+                name="facebookUrl"
+                type="url"
+                defaultValue={settings.facebookUrl}
+                placeholder="https://www.facebook.com/nogueiraportoadv/"
+                className="block w-full rounded-lg border px-3 py-2 text-sm"
+                style={{
+                  borderColor: "var(--border-soft)",
+                  background: "white",
+                }}
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="linkedinUrl"
+                className="block text-sm font-medium mb-1.5"
+                style={{ color: "var(--bg-dark)" }}
+              >
+                LinkedIn{" "}
+                <span
+                  className="font-normal text-dark"
+                  style={{ opacity: 0.6 }}
+                >
+                  (opcional)
+                </span>
+              </label>
+              <input
+                id="linkedinUrl"
+                name="linkedinUrl"
+                type="url"
+                defaultValue={settings.linkedinUrl}
+                placeholder="https://www.linkedin.com/company/nogueira-porto-advogados/"
+                className="block w-full rounded-lg border px-3 py-2 text-sm"
+                style={{
+                  borderColor: "var(--border-soft)",
+                  background: "white",
+                }}
+              />
+            </div>
+          </div>
+        </section>
+
         {/* ============ HERO (CARD VISUAL) ============ */}
         <section
           className="pt-6 border-t"

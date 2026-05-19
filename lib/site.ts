@@ -32,6 +32,18 @@ export const site = {
         href: "https://wa.me/5527996649954?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20jur%C3%ADdica.",
       },
     },
+    {
+      id: "saquarema",
+      city: "Saquarema",
+      state: "RJ",
+      address: "Rua 97, nº 501, Loja 206",
+      neighborhood: "Loteamento Balneário Jaconé · CEP 28.990-025",
+      whatsapp: {
+        number: "5522999410739",
+        display: "(22) 99941-0739",
+        href: "https://wa.me/5522999410739?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20jur%C3%ADdica.",
+      },
+    },
   ],
   primaryWhatsapp: {
     number: "5521995018495",

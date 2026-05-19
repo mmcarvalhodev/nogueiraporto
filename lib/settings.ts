@@ -20,6 +20,9 @@ export type SiteSettings = {
   heroEyebrow: string;
   heroHeading: string;
   heroDescription: string;
+  instagramUrl: string;
+  facebookUrl: string;
+  linkedinUrl: string;
 };
 
 const DEFAULTS: SiteSettings = {
@@ -33,6 +36,9 @@ const DEFAULTS: SiteSettings = {
     "Direito Imobiliário,\ncom tradição\n*registral e notarial*.",
   heroDescription:
     "Banca especializada em direito imobiliário, registral e notarial, com atuação judicial e extrajudicial em RJ e ES. Atendimento direto com os sócios.",
+  instagramUrl: "",
+  facebookUrl: "",
+  linkedinUrl: "",
 };
 
 const KEY_MAP = {
@@ -44,6 +50,9 @@ const KEY_MAP = {
   heroEyebrow: "hero_eyebrow",
   heroHeading: "hero_heading",
   heroDescription: "hero_description",
+  instagramUrl: "instagram_url",
+  facebookUrl: "facebook_url",
+  linkedinUrl: "linkedin_url",
 } as const;
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -68,6 +77,9 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       heroHeading: map.get(KEY_MAP.heroHeading) || DEFAULTS.heroHeading,
       heroDescription:
         map.get(KEY_MAP.heroDescription) || DEFAULTS.heroDescription,
+      instagramUrl: map.get(KEY_MAP.instagramUrl) ?? DEFAULTS.instagramUrl,
+      facebookUrl: map.get(KEY_MAP.facebookUrl) ?? DEFAULTS.facebookUrl,
+      linkedinUrl: map.get(KEY_MAP.linkedinUrl) ?? DEFAULTS.linkedinUrl,
     };
   } catch (err) {
     console.error(
@@ -105,6 +117,12 @@ export async function updateSiteSettings(
       key: KEY_MAP.heroDescription,
       value: patch.heroDescription,
     });
+  if (patch.instagramUrl !== undefined)
+    updates.push({ key: KEY_MAP.instagramUrl, value: patch.instagramUrl });
+  if (patch.facebookUrl !== undefined)
+    updates.push({ key: KEY_MAP.facebookUrl, value: patch.facebookUrl });
+  if (patch.linkedinUrl !== undefined)
+    updates.push({ key: KEY_MAP.linkedinUrl, value: patch.linkedinUrl });
 
   for (const { key, value } of updates) {
     await sql`
