@@ -40,6 +40,14 @@ export async function saveAppearance(formData: FormData) {
   const instagramUrl = String(formData.get("instagramUrl") ?? "").trim();
   const facebookUrl = String(formData.get("facebookUrl") ?? "").trim();
   const linkedinUrl = String(formData.get("linkedinUrl") ?? "").trim();
+  const trustBar1Label = String(formData.get("trustBar1Label") ?? "").trim();
+  const trustBar1Value = String(formData.get("trustBar1Value") ?? "").trim();
+  const trustBar2Label = String(formData.get("trustBar2Label") ?? "").trim();
+  const trustBar2Value = String(formData.get("trustBar2Value") ?? "").trim();
+  const trustBar3Label = String(formData.get("trustBar3Label") ?? "").trim();
+  const trustBar3Value = String(formData.get("trustBar3Value") ?? "").trim();
+  const trustBar4Label = String(formData.get("trustBar4Label") ?? "").trim();
+  const trustBar4Value = String(formData.get("trustBar4Value") ?? "").trim();
 
   if (!PALETTES.includes(palette)) {
     redirect("/admin/aparencia?error=palette");
@@ -66,6 +74,14 @@ export async function saveAppearance(formData: FormData) {
     instagramUrl,
     facebookUrl,
     linkedinUrl,
+    trustBar1Label,
+    trustBar1Value,
+    trustBar2Label,
+    trustBar2Value,
+    trustBar3Label,
+    trustBar3Value,
+    trustBar4Label,
+    trustBar4Value,
   });
 
   revalidatePath("/", "layout");

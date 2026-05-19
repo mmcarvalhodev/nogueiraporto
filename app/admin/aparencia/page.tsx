@@ -223,6 +223,90 @@ export default async function AppearancePage({
           </div>
         </section>
 
+        {/* ============ BARRA DE DESTAQUE (TRUST BAR) ============ */}
+        <section
+          className="pt-6 border-t"
+          style={{ borderColor: "var(--border-soft)" }}
+        >
+          <h3
+            className="font-serif text-lg font-semibold mb-1"
+            style={{ color: "var(--bg-dark)" }}
+          >
+            Barra de destaque
+          </h3>
+          <p className="text-xs text-dark mb-4" style={{ opacity: 0.7 }}>
+            A faixa escura abaixo do hero, com 4 indicadores rápidos do
+            escritório. Deixe um <em>valor</em> vazio para esconder aquele
+            item (a barra se reorganiza automaticamente).
+          </p>
+
+          <div className="space-y-4">
+            {[1, 2, 3, 4].map((n) => {
+              const label = (
+                settings as unknown as Record<string, string>
+              )[`trustBar${n}Label`];
+              const value = (
+                settings as unknown as Record<string, string>
+              )[`trustBar${n}Value`];
+              return (
+                <div
+                  key={n}
+                  className="grid sm:grid-cols-12 gap-3 items-end"
+                >
+                  <div className="sm:col-span-4">
+                    <label
+                      htmlFor={`trustBar${n}Label`}
+                      className="block text-sm font-medium mb-1.5"
+                      style={{ color: "var(--bg-dark)" }}
+                    >
+                      Indicador {n} — Título{" "}
+                      <span
+                        className="font-normal text-dark"
+                        style={{ opacity: 0.6 }}
+                      >
+                        (eyebrow)
+                      </span>
+                    </label>
+                    <input
+                      id={`trustBar${n}Label`}
+                      name={`trustBar${n}Label`}
+                      type="text"
+                      defaultValue={label}
+                      maxLength={40}
+                      className="block w-full rounded-lg border px-3 py-2 text-sm uppercase tracking-wider"
+                      style={{
+                        borderColor: "var(--border-soft)",
+                        background: "white",
+                      }}
+                    />
+                  </div>
+                  <div className="sm:col-span-8">
+                    <label
+                      htmlFor={`trustBar${n}Value`}
+                      className="block text-sm font-medium mb-1.5"
+                      style={{ color: "var(--bg-dark)" }}
+                    >
+                      Indicador {n} — Valor
+                    </label>
+                    <input
+                      id={`trustBar${n}Value`}
+                      name={`trustBar${n}Value`}
+                      type="text"
+                      defaultValue={value}
+                      maxLength={80}
+                      className="block w-full rounded-lg border px-3 py-2 text-sm"
+                      style={{
+                        borderColor: "var(--border-soft)",
+                        background: "white",
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
         {/* ============ REDES SOCIAIS ============ */}
         <section
           className="pt-6 border-t"

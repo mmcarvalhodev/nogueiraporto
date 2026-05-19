@@ -23,6 +23,14 @@ export type SiteSettings = {
   instagramUrl: string;
   facebookUrl: string;
   linkedinUrl: string;
+  trustBar1Label: string;
+  trustBar1Value: string;
+  trustBar2Label: string;
+  trustBar2Value: string;
+  trustBar3Label: string;
+  trustBar3Value: string;
+  trustBar4Label: string;
+  trustBar4Value: string;
 };
 
 const DEFAULTS: SiteSettings = {
@@ -39,6 +47,14 @@ const DEFAULTS: SiteSettings = {
   instagramUrl: "",
   facebookUrl: "",
   linkedinUrl: "",
+  trustBar1Label: "Inscritos",
+  trustBar1Value: "OAB/RJ · OAB/ES",
+  trustBar2Label: "Equipe",
+  trustBar2Value: "4 Advogados",
+  trustBar3Label: "Atuação",
+  trustBar3Value: "Niterói · Saquarema · Vila Velha",
+  trustBar4Label: "Foco principal",
+  trustBar4Value: "Imobiliário",
 };
 
 const KEY_MAP = {
@@ -53,6 +69,14 @@ const KEY_MAP = {
   instagramUrl: "instagram_url",
   facebookUrl: "facebook_url",
   linkedinUrl: "linkedin_url",
+  trustBar1Label: "trust_bar_1_label",
+  trustBar1Value: "trust_bar_1_value",
+  trustBar2Label: "trust_bar_2_label",
+  trustBar2Value: "trust_bar_2_value",
+  trustBar3Label: "trust_bar_3_label",
+  trustBar3Value: "trust_bar_3_value",
+  trustBar4Label: "trust_bar_4_label",
+  trustBar4Value: "trust_bar_4_value",
 } as const;
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -80,6 +104,22 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       instagramUrl: map.get(KEY_MAP.instagramUrl) ?? DEFAULTS.instagramUrl,
       facebookUrl: map.get(KEY_MAP.facebookUrl) ?? DEFAULTS.facebookUrl,
       linkedinUrl: map.get(KEY_MAP.linkedinUrl) ?? DEFAULTS.linkedinUrl,
+      trustBar1Label:
+        map.get(KEY_MAP.trustBar1Label) || DEFAULTS.trustBar1Label,
+      trustBar1Value:
+        map.get(KEY_MAP.trustBar1Value) || DEFAULTS.trustBar1Value,
+      trustBar2Label:
+        map.get(KEY_MAP.trustBar2Label) || DEFAULTS.trustBar2Label,
+      trustBar2Value:
+        map.get(KEY_MAP.trustBar2Value) || DEFAULTS.trustBar2Value,
+      trustBar3Label:
+        map.get(KEY_MAP.trustBar3Label) || DEFAULTS.trustBar3Label,
+      trustBar3Value:
+        map.get(KEY_MAP.trustBar3Value) || DEFAULTS.trustBar3Value,
+      trustBar4Label:
+        map.get(KEY_MAP.trustBar4Label) || DEFAULTS.trustBar4Label,
+      trustBar4Value:
+        map.get(KEY_MAP.trustBar4Value) || DEFAULTS.trustBar4Value,
     };
   } catch (err) {
     console.error(
@@ -123,6 +163,22 @@ export async function updateSiteSettings(
     updates.push({ key: KEY_MAP.facebookUrl, value: patch.facebookUrl });
   if (patch.linkedinUrl !== undefined)
     updates.push({ key: KEY_MAP.linkedinUrl, value: patch.linkedinUrl });
+  if (patch.trustBar1Label !== undefined)
+    updates.push({ key: KEY_MAP.trustBar1Label, value: patch.trustBar1Label });
+  if (patch.trustBar1Value !== undefined)
+    updates.push({ key: KEY_MAP.trustBar1Value, value: patch.trustBar1Value });
+  if (patch.trustBar2Label !== undefined)
+    updates.push({ key: KEY_MAP.trustBar2Label, value: patch.trustBar2Label });
+  if (patch.trustBar2Value !== undefined)
+    updates.push({ key: KEY_MAP.trustBar2Value, value: patch.trustBar2Value });
+  if (patch.trustBar3Label !== undefined)
+    updates.push({ key: KEY_MAP.trustBar3Label, value: patch.trustBar3Label });
+  if (patch.trustBar3Value !== undefined)
+    updates.push({ key: KEY_MAP.trustBar3Value, value: patch.trustBar3Value });
+  if (patch.trustBar4Label !== undefined)
+    updates.push({ key: KEY_MAP.trustBar4Label, value: patch.trustBar4Label });
+  if (patch.trustBar4Value !== undefined)
+    updates.push({ key: KEY_MAP.trustBar4Value, value: patch.trustBar4Value });
 
   for (const { key, value } of updates) {
     await sql`
