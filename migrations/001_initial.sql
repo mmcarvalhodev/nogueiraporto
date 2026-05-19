@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS team_members (
   photo_url       TEXT,
   initials        VARCHAR(4),
   bio             TEXT,
+  details         TEXT,
   display_order   INTEGER NOT NULL DEFAULT 0,
   is_active       BOOLEAN NOT NULL DEFAULT TRUE,
   created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),

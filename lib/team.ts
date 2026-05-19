@@ -8,6 +8,7 @@ export type TeamMember = {
   photoUrl: string | null;
   initials: string | null;
   bio: string | null;
+  details: string | null;
   displayOrder: number;
   isActive: boolean;
 };
@@ -20,6 +21,7 @@ type DbRow = {
   photo_url: string | null;
   initials: string | null;
   bio: string | null;
+  details: string | null;
   display_order: number;
   is_active: boolean;
 };
@@ -33,6 +35,7 @@ function toMember(r: DbRow): TeamMember {
     photoUrl: r.photo_url,
     initials: r.initials,
     bio: r.bio,
+    details: r.details,
     displayOrder: r.display_order,
     isActive: r.is_active,
   };
@@ -40,7 +43,7 @@ function toMember(r: DbRow): TeamMember {
 
 export async function getActiveTeam(): Promise<TeamMember[]> {
   const rows = (await sql`
-    SELECT id, name, role, oab_credentials, photo_url, initials, bio,
+    SELECT id, name, role, oab_credentials, photo_url, initials, bio, details,
            display_order, is_active
     FROM team_members
     WHERE is_active = TRUE
@@ -51,7 +54,7 @@ export async function getActiveTeam(): Promise<TeamMember[]> {
 
 export async function getAllTeam(): Promise<TeamMember[]> {
   const rows = (await sql`
-    SELECT id, name, role, oab_credentials, photo_url, initials, bio,
+    SELECT id, name, role, oab_credentials, photo_url, initials, bio, details,
            display_order, is_active
     FROM team_members
     ORDER BY display_order ASC, id ASC
@@ -63,7 +66,7 @@ export async function getTeamMemberById(
   id: number
 ): Promise<TeamMember | null> {
   const rows = (await sql`
-    SELECT id, name, role, oab_credentials, photo_url, initials, bio,
+    SELECT id, name, role, oab_credentials, photo_url, initials, bio, details,
            display_order, is_active
     FROM team_members
     WHERE id = ${id}
@@ -80,6 +83,7 @@ export type TeamMemberInput = {
   photoUrl?: string | null;
   initials?: string | null;
   bio?: string | null;
+  details?: string | null;
   displayOrder?: number;
   isActive?: boolean;
 };
@@ -89,7 +93,7 @@ export async function createTeamMember(
 ): Promise<number> {
   const rows = (await sql`
     INSERT INTO team_members
-      (name, role, oab_credentials, photo_url, initials, bio,
+      (name, role, oab_credentials, photo_url, initials, bio, details,
        display_order, is_active)
     VALUES (
       ${input.name},
@@ -98,6 +102,7 @@ export async function createTeamMember(
       ${input.photoUrl ?? null},
       ${input.initials ?? null},
       ${input.bio ?? null},
+      ${input.details ?? null},
       ${input.displayOrder ?? 999},
       ${input.isActive ?? true}
     )
@@ -119,6 +124,7 @@ export async function updateTeamMember(
       photo_url       = ${input.photoUrl ?? null},
       initials        = ${input.initials ?? null},
       bio             = ${input.bio ?? null},
+      details         = ${input.details ?? null},
       display_order   = ${input.displayOrder ?? 999},
       is_active       = ${input.isActive ?? true},
       updated_at      = NOW()

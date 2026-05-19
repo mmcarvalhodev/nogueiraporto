@@ -137,7 +137,7 @@ export default function TeamMemberForm({
               className="font-normal text-dark"
               style={{ opacity: 0.6 }}
             >
-              (para equipe de apoio sem OAB)
+              (1-2 linhas, aparece no card)
             </span>
           </label>
           <textarea
@@ -185,6 +185,45 @@ export default function TeamMemberForm({
             Se vazio, calcula automático a partir do nome.
           </p>
         </div>
+      </div>
+
+      {/* Detalhes (hover/modal) */}
+      <div>
+        <label
+          htmlFor="details"
+          className="block text-sm font-medium mb-1.5"
+          style={{ color: "var(--bg-dark)" }}
+        >
+          Detalhes adicionais{" "}
+          <span
+            className="font-normal text-dark"
+            style={{ opacity: 0.6 }}
+          >
+            (aparece ao passar o mouse / tocar no card no site público)
+          </span>
+        </label>
+        <textarea
+          id="details"
+          name="details"
+          rows={8}
+          defaultValue={member?.details ?? ""}
+          placeholder={
+            "Especializações, formação acadêmica, experiência destacada, línguas faladas, setores atendidos.\n\nEx:\n• Pós-graduado em Direito Civil pela FGV\n• Mestre em Direito Notarial\n• Atuação em causas complexas de inventário\n• Idiomas: inglês e espanhol"
+          }
+          className="block w-full rounded-lg border px-3 py-2 text-sm"
+          style={{
+            borderColor: "var(--border-soft)",
+            background: "white",
+          }}
+        />
+        <p
+          className="text-[11px] text-dark mt-1.5 leading-relaxed"
+          style={{ opacity: 0.6 }}
+        >
+          Texto livre. Quebras de linha são preservadas. Use linhas começando
+          com <code>•</code> ou <code>-</code> para virar lista. Deixe vazio
+          para não mostrar o popover.
+        </p>
       </div>
 
       {/* Ordem + Ativo */}

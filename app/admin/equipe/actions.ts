@@ -23,6 +23,7 @@ function readInput(formData: FormData): TeamMemberInput {
   const photoUrl = String(formData.get("photoUrl") ?? "").trim() || null;
   const initialsRaw = String(formData.get("initials") ?? "").trim();
   const bio = String(formData.get("bio") ?? "").trim() || null;
+  const details = String(formData.get("details") ?? "").trim() || null;
   const displayOrder = Number(formData.get("displayOrder") ?? 999);
   const isActive = formData.get("isActive") === "on";
 
@@ -33,6 +34,7 @@ function readInput(formData: FormData): TeamMemberInput {
     photoUrl,
     initials: initialsRaw || computeInitials(name),
     bio,
+    details,
     displayOrder: isNaN(displayOrder) ? 999 : displayOrder,
     isActive,
   };
