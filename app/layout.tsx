@@ -34,12 +34,14 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description:
-    "Banca de advocacia especializada em direito imobiliário, registral e notarial. Atuação judicial e extrajudicial em Niterói (RJ) e Vila Velha (ES). Atendimento direto com os sócios.",
+    "Banca de advocacia especializada em direito imobiliário, registral e notarial. Atuação judicial e extrajudicial em Niterói, Saquarema (RJ) e Vila Velha (ES). Atendimento direto com os sócios.",
   keywords: [
     "advogado imobiliário",
     "direito imobiliário",
     "advogado Niterói",
+    "advogado Saquarema",
     "advogado Vila Velha",
+    "advogado Região dos Lagos",
     "usucapião",
     "inventário extrajudicial",
     "regularização de imóvel",
@@ -53,7 +55,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} — ${site.tagline}`,
     description:
-      "Banca especializada em direito imobiliário, registral e notarial. Niterói e Vila Velha.",
+      "Banca especializada em direito imobiliário, registral e notarial. Niterói, Saquarema e Vila Velha.",
     images: [
       {
         url: "/images/logo-np.png",
@@ -67,7 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} — ${site.tagline}`,
     description:
-      "Banca especializada em direito imobiliário, registral e notarial.",
+      "Banca especializada em direito imobiliário, registral e notarial. Niterói, Saquarema e Vila Velha.",
     images: ["/images/logo-np.png"],
   },
   robots: { index: true, follow: true },
