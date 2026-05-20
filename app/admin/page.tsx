@@ -1,18 +1,21 @@
 import Link from "next/link";
 import { getAllTeam } from "@/lib/team";
 import { getAllPostsIncludingDrafts } from "@/lib/posts";
+import { getAllAreas } from "@/lib/practice-areas";
 import { getSiteSettings } from "@/lib/settings";
 
 export default async function AdminDashboard() {
-  const [team, posts, settings] = await Promise.all([
+  const [team, posts, areas, settings] = await Promise.all([
     getAllTeam(),
     getAllPostsIncludingDrafts(),
+    getAllAreas(),
     getSiteSettings(),
   ]);
 
   const activeMembers = team.filter((m) => m.isActive).length;
   const publishedPosts = posts.filter((p) => p.isPublished).length;
   const draftPosts = posts.length - publishedPosts;
+  const activeAreas = areas.filter((a) => a.isActive).length;
 
   const PALETTE_LABELS: Record<string, string> = {
     navy: "Marinho clássico",
@@ -24,8 +27,18 @@ export default async function AdminDashboard() {
     {
       href: "/admin/aparencia",
       title: "Aparência",
-      description: "Paleta de cores, efeitos da logo, hero (logo ou imagem).",
+      description: "Paleta de cores, hero, redes sociais e barra de destaque.",
       meta: `${PALETTE_LABELS[settings.palette]} · Hero: ${settings.heroMode === "logo" ? "Logo" : "Imagem"}`,
+    },
+    {
+      href: "/admin/areas",
+      title: "Áreas de atuação",
+      description:
+        "Cards da seção “Como podemos te ajudar” — adicionar, editar, reordenar.",
+      meta:
+        activeAreas > 0
+          ? `${activeAreas} área${activeAreas === 1 ? "" : "s"} ativa${activeAreas === 1 ? "" : "s"}`
+          : "Nenhuma área ativa",
     },
     {
       href: "/admin/equipe",
@@ -59,7 +72,7 @@ export default async function AdminDashboard() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         {cards.map((c) => (
           <Link
             key={c.href}

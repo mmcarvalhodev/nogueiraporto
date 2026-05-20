@@ -44,6 +44,9 @@ export default async function AdminLayout({
             <Link href="/admin/aparencia" className="hover:opacity-70">
               Aparência
             </Link>
+            <Link href="/admin/areas" className="hover:opacity-70">
+              Áreas
+            </Link>
             <Link href="/admin/equipe" className="hover:opacity-70">
               Equipe
             </Link>
