@@ -1,7 +1,41 @@
 import { site } from "@/lib/site";
 import WhatsAppCTA from "./WhatsAppCTA";
 
+// Número por extenso em PT-BR. Cobre até 10 escritórios — mais que
+// suficiente. Fallback pra dígito caso passe.
+const NUM_PT = [
+  "",
+  "Um",
+  "Dois",
+  "Três",
+  "Quatro",
+  "Cinco",
+  "Seis",
+  "Sete",
+  "Oito",
+  "Nove",
+  "Dez",
+] as const;
+
 export default function Contato() {
+  // Cast pra number genérico — `as const` em site.ts torna .length um
+  // literal type (3) que faz TS reclamar de comparações com 1, 2, etc.
+  const officeCount: number = site.offices.length;
+  const numByExt = NUM_PT[officeCount] ?? String(officeCount);
+  // "Niterói (RJ), Vila Velha (ES) e Saquarema (RJ)"
+  const citiesList = new Intl.ListFormat("pt-BR", {
+    style: "long",
+    type: "conjunction",
+  }).format(site.offices.map((o) => `${o.city} (${o.state})`));
+
+  // Grid responsivo: 1 col pra 1 office, 2 pra 2, 3+ usa 3 cols em lg.
+  const gridCols =
+    officeCount === 1
+      ? "md:grid-cols-1 max-w-md mx-auto"
+      : officeCount === 2
+        ? "md:grid-cols-2"
+        : "md:grid-cols-2 lg:grid-cols-3";
+
   return (
     <section
       id="contato"
@@ -13,18 +47,23 @@ export default function Contato() {
             Vamos conversar
           </div>
           <h2 className="font-serif text-3xl md:text-5xl mb-6 leading-tight">
-            Dois escritórios,
-            <br />
-            uma <span className="italic text-accent">banca só.</span>
+            {officeCount === 1 ? (
+              <>Onde nos encontrar.</>
+            ) : (
+              <>
+                {numByExt} escritórios,
+                <br />
+                uma <span className="italic text-accent">banca só.</span>
+              </>
+            )}
           </h2>
           <p className="text-light-soft max-w-xl mx-auto leading-relaxed">
-            Atendimento presencial em Niterói (RJ) e Vila Velha (ES), e remoto
-            para todo o Brasil. Conte sua situação no WhatsApp do escritório
-            mais próximo.
+            Atendimento presencial em {citiesList}, e remoto para todo o
+            Brasil. Conte sua situação no WhatsApp do escritório mais próximo.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-10">
+        <div className={`grid ${gridCols} gap-6 mb-10`}>
           {site.offices.map((o) => (
             <div
               key={o.id}
@@ -44,7 +83,7 @@ export default function Contato() {
                 </div>
               </div>
               <WhatsAppCTA
-                office={o.id as "niteroi" | "vilavelha"}
+                office={o.id}
                 className="inline-flex items-center gap-2 btn-primary px-6 py-3 rounded-full font-semibold text-sm w-full justify-center"
               >
                 <svg

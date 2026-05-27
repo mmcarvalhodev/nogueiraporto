@@ -9,17 +9,27 @@ type Props = {
   style?: React.CSSProperties;
   children: React.ReactNode;
   ariaLabel?: string;
-  /** Qual escritório o usuário quer falar com. Se omitido, mostra os dois. */
-  office?: "niteroi" | "vilavelha";
+  /** Qual escritório o usuário quer falar com (id do site.offices).
+   *  Se omitido, mostra todos. */
+  office?: string;
 };
+
+// Lista de cidades dinâmica, formatada PT-BR: "Niterói (RJ), Vila Velha (ES) e Saquarema (RJ)"
+const OFFICES_LINE = new Intl.ListFormat("pt-BR", {
+  style: "long",
+  type: "conjunction",
+}).format(site.offices.map((o) => `${o.city} (${o.state})`));
 
 const SCOPE_ITEMS = [
   "Direito Imobiliário, Registral e Notarial",
   "Família, Sucessões e Inventários",
   "Consumidor, Trabalhista e Previdenciário",
   "Criminal e Pessoas com Deficiência",
-  "Escritórios em Niterói (RJ) e Vila Velha (ES)",
+  `Escritórios em ${OFFICES_LINE}`,
 ];
+
+// "Niterói, Vila Velha & Saquarema" pro rodapé do modal
+const CITIES_AMP = site.offices.map((o) => o.city).join(" & ");
 
 export default function WhatsAppCTA({
   className,
@@ -182,7 +192,7 @@ export default function WhatsAppCTA({
                       className="text-[11px] pt-1"
                       style={{ opacity: 0.7 }}
                     >
-                      Atendimento direto com a banca · Niterói &amp; Vila Velha
+                      Atendimento direto com a banca · {CITIES_AMP}
                     </div>
                   </div>
 
