@@ -57,32 +57,21 @@ export default async function Hero() {
 
         <div className="md:col-span-5 hidden md:block">
           <div
-            className={`rounded-2xl overflow-hidden border shadow-2xl relative ${
-              useImage ? "" : "aspect-[4/5]"
-            }`}
+            className="aspect-[4/5] rounded-2xl overflow-hidden border shadow-2xl relative"
             style={{
               borderColor: "var(--accent)",
               borderWidth: "1px",
-              // Modo imagem: bg-dark (preenche cantos quando a logo for
-              // mais alta que larga ou tiver fundo transparente).
-              // Modo logo NP: mantém bg-dark como antes.
-              background: "var(--bg-dark)",
+              background: useImage ? "transparent" : "var(--bg-dark)",
             }}
           >
             {useImage ? (
-              /* Imagem renderiza no tamanho natural — sem aspect-[4/5] fixo
-                 e sem object-cover. O retângulo cresce com a imagem em vez
-                 de cortá-la. width/height são apenas dicas pro layout
-                 inicial (next/image escala via CSS w-full h-auto). */
               <Image
                 src={settings.heroImageUrl}
                 alt="Nogueira Porto Advocacia"
-                width={1200}
-                height={1200}
+                fill
                 sizes="(max-width: 768px) 0px, 40vw"
                 priority
-                className="w-full h-auto block"
-                style={{ objectFit: "contain" }}
+                className="object-cover"
               />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center p-12">
